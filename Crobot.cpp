@@ -3,13 +3,14 @@
 #include <ctime>
 #include "Crobot.h"
 using namespace std;
-Crobot::Crobot(char name,int dol,int HP,int MP,int Atk,int Def){
+Crobot::Crobot(char name,int dol,int HP,int MP,int Atk,int Def,int Agi){
     this->name = name;
     this->dol = dol;
     this->HP = HP;
     this->MP = MP;
     this->Atk = Atk;
     this->Def = Def;
+    this->Agi = Agi;
     //ctor
 }
 
@@ -37,7 +38,6 @@ void Crobot::random(void){//製造隨機變數的陣列
 
 void Crobot::healing(void){
     if(Getname()=='W'){
-
     }
     else{
         HP+=10;
@@ -46,6 +46,19 @@ void Crobot::healing(void){
     }
 
 }
+
+bool Crobot::evasion(void){
+        srand((unsigned)time(NULL));
+        int low=1,up=100;//上下限
+        double r01,r;
+        r01=(double)rand()/(RAND_MAX);
+        r=r01*(up-low+1.0)+low;
+        if(Agi>r)
+            return true;
+        else
+            return false;
+}
+
 
 void Crobot::fight(Crobot &C2){
     if(Getname()=='W'){
